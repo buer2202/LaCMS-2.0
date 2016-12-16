@@ -28,7 +28,8 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $category_id = $request->category_id;
-        $title = trim($request->title);
+        $title = trim($request->title) ?: null;
+
         $dataList = $this->document->getList($category_id, $title);
 
         return view('admin.document.index', compact('dataList', 'category_id', 'title'));

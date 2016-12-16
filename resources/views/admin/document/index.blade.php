@@ -47,7 +47,7 @@
             @endforeach
         </tbody>
     </table>
-    {!! $dataList->links() !!}
+    {!! $dataList->appends(['category_id' => $category_id, 'title' => $title])->links() !!}
 </div>
 @endsection
 
