@@ -214,6 +214,19 @@ class CategoryRepository extends BaseRepository
         return false;
     }
 
+    // 递归子元素
+    private function myChildren($root, &$children)
+    {
+        if(isset($root['branch'])) {
+            foreach($root['branch'] as $branch) {
+                $this->myChildren($branch, $children);
+            }
+            unset($root['branch']);
+        }
+        $children[] = $root;
+        return $children;
+    }
+
     /**
      * 获取某个元素的所有子栏目列表
      * @param int $cid 元素 id
@@ -227,21 +240,10 @@ class CategoryRepository extends BaseRepository
             $root['branch'] = $root;
         }
 
-        function children ($root, &$children) {
-            if(isset($root['branch'])) {
-                foreach($root['branch'] as $branch) {
-                    children($branch, $children);
-                }
-                unset($root['branch']);
-            }
-            $children[] = $root;
-            return $children;
-        }
-
         if(isset($root['branch'])) {
             $children = array();
             foreach($root['branch'] as $branch) {
-               children($branch, $children);
+               $this->myChildren($branch, $children);
             }
         } else {
             $children = false;

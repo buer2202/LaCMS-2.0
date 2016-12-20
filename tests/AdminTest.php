@@ -4,23 +4,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ExampleTest extends TestCase
+class AdminTest extends TestCase
 {
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testHome()
-    {
-        $this->visit('/')
-             ->see('container')
-             ->visitRoute('category.index', 6)
-             ->see('container')
-             ->visitRoute('document.index', '58525a5651c5a')
-             ->see('container');
-    }
-
     public function testLogin()
     {
         $this->visit('/login')
@@ -30,7 +15,7 @@ class ExampleTest extends TestCase
              ->seePageIs('/admin/category');
     }
 
-    public function testAdmin()
+    public function testAdminPage()
     {
         $this->actingAs(app(App\User::class)->first())
              ->visitRoute('admin.category.index')
@@ -42,5 +27,4 @@ class ExampleTest extends TestCase
              ->visitRoute('admin.administrator.index')
              ->see('系统管理员');
     }
-
 }
