@@ -20,3 +20,14 @@ Route::get('document/{id}', 'Home\DocumentController@index')->name('document.ind
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
+
+Route::get('test', function () {
+
+    function a()
+    {
+        a();
+
+        return 'out';
+    }
+
+});
