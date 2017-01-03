@@ -1,8 +1,6 @@
 <?php
 // 栏目
 Route::patch('category/status/{id}', 'CategoryController@setStatus')->name('admin.category.status');
-Route::patch('category/navshow/{id}', 'CategoryController@setNavshow')->name('admin.category.navshow');
-
 Route::get('category/document/{id}', 'CategoryController@document')->name('admin.category.document');
 Route::post('category/setdocument/{id}', 'CategoryController@setDocument')->name('admin.category.setDocument');
 
