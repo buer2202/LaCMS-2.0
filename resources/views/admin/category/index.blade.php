@@ -322,9 +322,11 @@ $(function () {
 
                     // 禁用后，所有子栏目都要改状态
                     $this.closest("ul").find("ul .set-status").each(function () {
-                        $(this).removeClass('btn-warning').addClass('btn-success').data('status', 1).attr('title', '启用本栏目')
-                        .find('span').removeClass('glyphicon-ban-circle').addClass('glyphicon-ok-circle');
-                        $(this).parent().siblings(".name").addClass("status-disabled");
+                        if($(this).data("status") != 0) {
+                            $(this).removeClass('btn-warning').addClass('btn-success').data('status', 1).attr('title', '启用本栏目')
+                            .find('span').removeClass('glyphicon-ban-circle').addClass('glyphicon-ok-circle');
+                            $(this).parent().siblings(".name").addClass("status-disabled");
+                        }
                     });
                 }
             } else {
