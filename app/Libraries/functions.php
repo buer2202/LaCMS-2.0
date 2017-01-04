@@ -1,20 +1,4 @@
 <?php
-// 显示分类选择器
-function categorySelector($selectId, $selectName, $selectClass, $value, $showRoot = false)
-{
-    $category = app(App\Repositories\CategoryRepository::class);
-
-    $tree = $category->tree();
-    $select = array(
-        'id'    => $selectId,
-        'name'  => $selectName,
-        'class' => $selectClass,
-        'value' => $value,
-    );
-
-    echo view('admin.category.widgetSelector', compact('tree', 'select', 'showRoot'))->render();
-}
-
 /**
  * 获取文件路径
  * @param string $md5 附件MD5
@@ -119,7 +103,6 @@ function outputTree ($tree) {
 // 输出栏目选择控件
 function selectTree ($tree, $value) {
     foreach($tree as $leaf) {
-        $tab = '';
         $tab = str_repeat('&nbsp;', ($leaf['level']) * 4);
         if($value == $leaf['id']) {
             echo '<option value="' . $leaf['id'] . '" selected>' . $tab . $leaf['name'] . '</option>';
@@ -131,4 +114,20 @@ function selectTree ($tree, $value) {
             selectTree($leaf['branch'], $value);
         }
     }
+}
+
+// 显示分类选择器
+function categorySelector($selectId, $selectName, $selectClass, $value, $showRoot = false)
+{
+    $category = app(App\Repositories\CategoryRepository::class);
+
+    $tree = $category->tree();
+    $select = array(
+        'id'    => $selectId,
+        'name'  => $selectName,
+        'class' => $selectClass,
+        'value' => $value,
+    );
+
+    echo view('admin.category.widgetSelector', compact('tree', 'select', 'showRoot'))->render();
 }

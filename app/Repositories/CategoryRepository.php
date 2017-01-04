@@ -110,7 +110,7 @@ class CategoryRepository extends BaseRepository
                 }
 
                 // 检查文档
-                $docs = \App\Document::where('category_id', $cid)->where('status', '<>', 0)->count();
+                $docs = \App\Document::where('category_id', $cid)->count();
                 if(!empty($docs)) {
                     $this->error = '该栏目下还有文章, 不能删除';
                     return false;
@@ -119,7 +119,6 @@ class CategoryRepository extends BaseRepository
                 // 更新数据
                 $result = $this->model->
                     where('id', $cid)->
-                    where('status', '<>', 0)->
                     delete();
                 if(false === $result) {
                     $this->error = '数据库写入错误';
@@ -145,7 +144,6 @@ class CategoryRepository extends BaseRepository
                 // 更新数据
                 $result = $this->model->
                     where('id', $cid)->
-                    where('status', '<>', 0)->
                     update([
                         'status'           => 1,
                         'user_id_modify'  => $uid,
@@ -164,7 +162,6 @@ class CategoryRepository extends BaseRepository
                 }
                 $result = $this->model->
                     whereIn('id', $cids)->
-                    where('status', '<>', 0)->
                     update([
                         'status'           => 2,
                         'user_id_modify'  => $uid,
