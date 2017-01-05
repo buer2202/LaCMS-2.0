@@ -39,7 +39,6 @@ class CreateDocumentsTable extends Migration
             $table->string('info_6', 500)->default('')->comment('备选信息6');
             $table->bigInteger('created_at')->comment('创建时间');
             $table->bigInteger('updated_at')->comment('更新时间');
-            $table->bigInteger('deleted_at')->nullable()->comment('删除时间');
         });
     }
 
